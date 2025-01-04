@@ -1,6 +1,5 @@
-import React from 'react';
-import Logo from '../assets/SunnyShoresLogo.png';
-
+import React from "react";
+import { assets } from "../assets/assets";
 const Banner = () => {
   return (
     <div className="w-full bg-sand shadow-md">
@@ -9,7 +8,7 @@ const Banner = () => {
         {/* Left side: Logo */}
         <div className="w-full md:w-1/2 mb-4 md:mb-0 p-2 flex justify-center md:justify-start">
           <img
-            src={Logo}
+            src={assets.Logo}
             alt="Sunny Shores Logo"
             className="max-h-32 md:max-h-40 object-contain"
           />
