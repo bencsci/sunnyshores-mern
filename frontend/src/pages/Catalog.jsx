@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
 import { ShopContext } from "../context/shopContext";
-import ProductCatelog from "../components/ProductCatelog";
+import ProductCatalog from "../components/ProductCatalog";
 
-const Catelog = () => {
+const Catalog = () => {
   const { products } = useContext(ShopContext);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [sortOption, setSortOption] = useState("relevant");
@@ -123,7 +123,7 @@ const Catelog = () => {
       {/* Products Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {sortedProducts.map((product) => (
-          <ProductCatelog
+          <ProductCatalog
             id={product._id}
             image={product.image}
             name={product.name}
@@ -135,4 +135,4 @@ const Catelog = () => {
   );
 };
 
-export default Catelog;
+export default Catalog;

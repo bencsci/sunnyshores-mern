@@ -47,7 +47,7 @@ const Navbar = () => {
         </li>
         <li className="p-4 hover:underline">
           <NavLink
-            to="/catelog"
+            to="/catalog"
             className={({ isActive }) =>
               isActive ? "underline font-semibold" : ""
             }
@@ -110,7 +110,7 @@ const Navbar = () => {
           </li>
           <li className="p-4 border-b border-white">
             <NavLink
-              to="/catelog"
+              to="/catalog"
               onClick={handleNav}
               className={({ isActive }) =>
                 isActive ? "underline font-semibold" : ""

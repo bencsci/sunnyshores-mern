@@ -42,7 +42,7 @@ const Cart = () => {
           </div>
 
           {/* Browse Catalogue Button */}
-          <Link to="/catelog">
+          <Link to="/catalog">
             <button className="bg-teal text-white px-6 py-2 rounded shadow mt-6">
               Browse Catalogue
             </button>

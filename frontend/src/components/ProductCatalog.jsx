@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { ShopContext } from "../context/shopContext";
 import { Link } from "react-router";
 
-const ProductCatelog = ({ id, image, name, price }) => {
+const ProductCatalog = ({ id, image, name, price }) => {
   const { currency } = useContext(ShopContext);
 
   return (
@@ -23,4 +23,4 @@ const ProductCatelog = ({ id, image, name, price }) => {
   );
 };
 
-export default ProductCatelog;
+export default ProductCatalog;
