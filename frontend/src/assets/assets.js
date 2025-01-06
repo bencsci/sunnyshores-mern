@@ -9,6 +9,7 @@ import Sandles from "./Sandles.png";
 import StrawHat from "./StrawHat.png";
 import SunGlasses from "./SunGlasses.png";
 import SwimTrunks from "./SwimTrunks.png";
+import Logo from "./SunnyShoresLogo.png";
 
 export const assets = {
   BlueSurfBoard,
@@ -21,6 +22,7 @@ export const assets = {
   StrawHat,
   SwimTrunks,
   SunGlasses,
+  Logo,
 };
 
 export const products = [
@@ -33,6 +35,18 @@ export const products = [
     image: [BlueSurfBoard],
     category: "Surf",
     subCategory: "BRD",
+    reviews: [
+      {
+        reviewer: "John Doe",
+        comment: "Amazing board for beginners!",
+        rating: 5,
+      },
+      {
+        reviewer: "Alice Smith",
+        comment: "Very sturdy and reliable.",
+        rating: 4,
+      },
+    ],
   },
   {
     _id: "2",
@@ -43,6 +57,9 @@ export const products = [
     image: [BucketHat],
     category: "Accessories",
     subCategory: "HAT",
+    reviews: [
+      { reviewer: "Jane Doe", comment: "Stylish and practical!", rating: 5 },
+    ],
   },
   {
     _id: "3",
@@ -53,6 +70,14 @@ export const products = [
     image: [LyocellShirt],
     category: "Shirts",
     subCategory: "SHR",
+    reviews: [
+      {
+        reviewer: "Mike Johnson",
+        comment: "Feels great and fits well.",
+        rating: 5,
+      },
+      { reviewer: "Sarah Lee", comment: "Perfect for hot weather.", rating: 4 },
+    ],
   },
   {
     _id: "4",
@@ -63,6 +88,13 @@ export const products = [
     image: [PurpleSurfBoard],
     category: "Surf",
     subCategory: "BRD",
+    reviews: [
+      {
+        reviewer: "Eve Adams",
+        comment: "Handles waves like a dream.",
+        rating: 5,
+      },
+    ],
   },
   {
     _id: "5",
@@ -72,6 +104,14 @@ export const products = [
     image: [RedSurfBoard],
     category: "Surf",
     subCategory: "BRD",
+    reviews: [
+      { reviewer: "Tom Clark", comment: "Fast and responsive!", rating: 5 },
+      {
+        reviewer: "Lucy Brown",
+        comment: "Great for experienced surfers.",
+        rating: 4,
+      },
+    ],
   },
   {
     _id: "6",
@@ -82,6 +122,14 @@ export const products = [
     image: [ResortShirt],
     category: "Shirts",
     subCategory: "SHR",
+    reviews: [
+      {
+        reviewer: "Emily Taylor",
+        comment: "Comfortable and stylish.",
+        rating: 5,
+      },
+      { reviewer: "Nick White", comment: "Perfect for vacations!", rating: 5 },
+    ],
   },
   {
     _id: "7",
@@ -92,6 +140,10 @@ export const products = [
     image: [Sandles],
     category: "Footwear",
     subCategory: "FET",
+    reviews: [
+      { reviewer: "Sam Green", comment: "Super comfy and durable.", rating: 5 },
+      { reviewer: "Anna Black", comment: "Great for long walks.", rating: 4 },
+    ],
   },
   {
     _id: "8",
@@ -101,6 +153,7 @@ export const products = [
     image: [StrawHat],
     category: "Accessories",
     subCategory: "HAT",
+    reviews: [{ reviewer: "Grace Hall", comment: "Looks amazing!", rating: 5 }],
   },
   {
     _id: "9",
@@ -111,6 +164,18 @@ export const products = [
     image: [SunGlasses],
     category: "Accessories",
     subCategory: "GLS",
+    reviews: [
+      {
+        reviewer: "Chris Parker",
+        comment: "Clear vision and stylish design.",
+        rating: 5,
+      },
+      {
+        reviewer: "Dana White",
+        comment: "Very comfortable to wear.",
+        rating: 4,
+      },
+    ],
   },
   {
     _id: "10",
@@ -121,5 +186,22 @@ export const products = [
     image: [SwimTrunks],
     category: "Swimwear",
     subCategory: "TRK",
+    reviews: [
+      {
+        reviewer: "Alex Rivers",
+        comment: "Fits perfectly and dries fast.",
+        rating: 5,
+      },
+      {
+        reviewer: "Sophie Carter",
+        comment: "Great for swimming and lounging.",
+        rating: 4,
+      },
+      {
+        reviewer: "Ryan Scott",
+        comment: "Amazing quality for the price.",
+        rating: 5,
+      },
+    ],
   },
 ];

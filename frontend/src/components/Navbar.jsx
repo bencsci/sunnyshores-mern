@@ -4,9 +4,27 @@ import { NavLink } from "react-router";
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
 
   const handleNav = () => {
     setNav(!nav);
+  };
+
+  const handleTouchStart = (e) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStart - touchEnd > 50) {
+      setNav(false);
+    }
+    setTouchStart(null);
+    setTouchEnd(null);
   };
 
   return (
@@ -29,7 +47,7 @@ const Navbar = () => {
         </li>
         <li className="p-4 hover:underline">
           <NavLink
-            to="/catalog"
+            to="/catelog"
             className={({ isActive }) =>
               isActive ? "underline font-semibold" : ""
             }
@@ -68,7 +86,10 @@ const Navbar = () => {
       <div
         className={`${
           nav ? "left-0" : "-left-full"
-        } fixed top-0 w-[60%] h-full bg-teal text-white ease-in-out duration-300`}
+        } fixed top-0 w-[60%] h-full bg-[#00B8A5] text-white ease-in-out duration-300 z-50`}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
       >
         <h1 className="text-3xl font-bold m-4">
           <NavLink to="/" onClick={handleNav}>
@@ -89,7 +110,7 @@ const Navbar = () => {
           </li>
           <li className="p-4 border-b border-white">
             <NavLink
-              to="/catalog"
+              to="/catelog"
               onClick={handleNav}
               className={({ isActive }) =>
                 isActive ? "underline font-semibold" : ""
