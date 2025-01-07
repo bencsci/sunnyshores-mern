@@ -11,14 +11,16 @@ const Catalog = () => {
   // Categories for filtering
   const categories = ["Shirts", "Surf", "Accessories", "Footwear", "Swimwear"];
 
-  // Handle checkbox changes
+  // Updates the selectedCategories based on check box changes
   const handleCheckboxChange = (category) => {
     if (selectedCategories.includes(category)) {
+      // Removes the category when unchecked
       setSelectedCategories(
         selectedCategories.filter((cat) => cat !== category)
       );
     } else {
-      setSelectedCategories([...selectedCategories, category]);
+      // Add the category when checked
+      setSelectedCategories([...selectedCategories, category]); // Merge the array
     }
   };
 
@@ -27,16 +29,12 @@ const Catalog = () => {
     setSelectedCategories([]);
   };
 
-  // Sort products based on the selected sorting option
-  const handleSortChange = (e) => {
-    setSortOption(e.target.value);
-  };
-
   // Filter products based on selected categories
   const filteredProducts =
     selectedCategories.length === 0
       ? products
       : products.filter((product) =>
+          // get the products that have the same category tag
           selectedCategories.includes(product.category)
         );
 
@@ -109,7 +107,7 @@ const Catalog = () => {
             <h2 className="text-lg font-semibold mb-4">Sort By</h2>
             <select
               value={sortOption}
-              onChange={handleSortChange}
+              onChange={(sortOption) => setSortOption(sortOption.target.value)}
               className="border border-gray-300 rounded px-4 py-2 text-sm bg-gray-50 hover:bg-gray-100 transition"
             >
               <option value="relevant">Relevant</option>
