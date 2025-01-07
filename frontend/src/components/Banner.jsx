@@ -38,10 +38,10 @@ const Banner = () => {
             {/* Action Buttons */}
             <div className="mt-3 flex justify-end gap-3">
               {/* Search Button */}
-              <Link to="/catelog">
+              <Link to="/catalog">
                 <button
                   className="w-14 lg:w-20 bg-teal text-white px-3 py-2 rounded shadow hover:bg-teal-600 transition-colors flex items-center justify-center"
-                  title="Catelog"
+                  title="Catalog"
                 >
                   <FaSearch size={18} />
                 </button>
