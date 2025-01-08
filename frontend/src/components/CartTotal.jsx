@@ -50,12 +50,6 @@ const CartTotal = () => {
           {amounts.total.toFixed(2)}
         </p>
       </div>
-      <button
-        onClick={() => navigate("/place-order")}
-        className="mt-4 w-full bg-teal text-white py-2 rounded shadow hover:bg-teal-500 transition"
-      >
-        Proceed to Checkout
-      </button>
     </div>
   );
 };

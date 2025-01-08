@@ -82,7 +82,7 @@ const Banner = () => {
                       <Link to="/login">My Profile</Link>
                     </li>
                     <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">
-                      <Link to="/login">Orders</Link>
+                      <Link to="/orders">Orders</Link>
                     </li>
                     <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">
                       <Link to="/login">Logout</Link>
