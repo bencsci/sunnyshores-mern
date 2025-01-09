@@ -11,7 +11,7 @@ const productRouter = express.Router();
 
 productRouter.post(
   "/add",
-  upload.fields([{ name: "image1", maxCount: 1 }]),
+  upload.fields([{ name: "image", maxCount: 1 }]),
   addProduct
 );
 productRouter.post("/remove", removedProduct);
