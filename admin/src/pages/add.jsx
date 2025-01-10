@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { backendUrl } from "../App";
+import { toast } from "react-toastify";
 
 const add = ({ token }) => {
   const [name, setName] = useState("");
@@ -61,9 +62,20 @@ const add = ({ token }) => {
         { headers: { token } }
       );
       console.log(response.data);
+      if (response.data.success) {
+        toast.success(response.data.message);
+        setName("");
+        setDescription("");
+        setPrice("");
+        setCategory("");
+        setReviews([]);
+        setImage(null);
+      } else {
+        toast.error(response.data.message);
+      }
     } catch (error) {
       console.error(error);
-      alert("Error adding product.");
+      toast.error(error.message);
     }
   };
 
