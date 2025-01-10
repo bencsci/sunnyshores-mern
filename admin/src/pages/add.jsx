@@ -9,12 +9,12 @@ const add = ({ token }) => {
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
   const [reviews, setReviews] = useState([]);
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState("");
 
   // Add new review state
   const [newReviewer, setNewReviewer] = useState("");
   const [newComment, setNewComment] = useState("");
-  const [newRating, setNewRating] = useState("");
+  const [newRating, setNewRating] = useState(null);
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
@@ -69,6 +69,9 @@ const add = ({ token }) => {
         setPrice("");
         setCategory("");
         setReviews([]);
+        setNewReviewer("");
+        setNewComment("");
+        setNewRating("");
         setImage(null);
       } else {
         toast.error(response.data.message);
