@@ -58,7 +58,7 @@ const Cart = () => {
                 className="flex flex-col sm:flex-row items-center sm:justify-between bg-white shadow rounded-lg p-4 space-y-4 sm:space-y-0 sm:space-x-4"
               >
                 <img
-                  src={item.image[0]}
+                  src={item.image}
                   alt={item.name}
                   className="w-32 h-32 object-cover rounded-lg"
                 />

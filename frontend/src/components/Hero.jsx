@@ -1,33 +1,28 @@
-import React, { useState, useEffect } from "react";
-import { assets } from "../assets/assets";
+import React, { useState, useEffect, useContext } from "react";
+import { ShopContext } from "../context/shopContext";
+import Placeholder from "../assets/Placeholder.png";
 
 const Hero = () => {
-  const carouselImages = [
-    { src: assets.BlueSurfBoard, name: "Blue Surfboard" },
-    { src: assets.PurpleSurfBoard, name: "Purple Surfboard" },
-    { src: assets.RedSurfBoard, name: "Red Surfboard" },
-    { src: assets.BucketHat, name: "Bucket Hat" },
-    { src: assets.LyocellShirt, name: "Lyocell Shirt" },
-    { src: assets.ResortShirt, name: "Resort Shirt" },
-    { src: assets.Sandles, name: "Sandals" },
-    { src: assets.StrawHat, name: "Straw Hat" },
-    { src: assets.SwimTrunks, name: "Swim Trunks" },
-    { src: assets.SunGlasses, name: "Sunglasses" },
-  ];
-
+  const { products } = useContext(ShopContext); // Access products from ShopContext
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % carouselImages.length);
+      if (products.length > 0) {
+        setCurrentIndex((prev) => (prev + 1) % products.length);
+      }
     }, 3000);
 
     return () => {
       clearInterval(intervalId);
     };
-  }, [carouselImages.length]);
+  }, [products]);
 
-  const { src, name } = carouselImages[currentIndex];
+  // Determine the current product or use placeholder
+  const currentProduct =
+    products.length > 0
+      ? products[currentIndex]
+      : { image: Placeholder, name: "Loading Product..." };
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
@@ -57,10 +52,14 @@ const Hero = () => {
       {/* Carousel Section */}
       <div className="flex flex-col items-center md:items-start">
         <div className="relative w-full text-white flex items-center justify-center">
-          <img src={src} alt={name} className="h-full w-auto object-contain" />
+          <img
+            src={currentProduct.image}
+            alt={currentProduct.name}
+            className="h-full w-auto object-contain"
+          />
         </div>
         <div className="bg-teal py-3 px-4 text-white w-full text-center">
-          {name}
+          {currentProduct.name}
         </div>
       </div>
     </div>

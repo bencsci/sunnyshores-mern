@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Routes, Route } from "react-router";
 import Home from "./pages/Home";
 import Catalog from "./pages/Catalog";

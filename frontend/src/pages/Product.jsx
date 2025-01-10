@@ -59,7 +59,7 @@ const Product = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="flex items-center justify-center">
             <img
-              src={productData.image[0]}
+              src={productData.image}
               alt={productData.name}
               className="w-full h-auto object-cover rounded-lg shadow-md"
             />

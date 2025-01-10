@@ -9,7 +9,7 @@ const ProductCatalog = ({ id, image, name, price }) => {
     <div className="bg-white shadow rounded overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">
       {/* Product Image */}
       <Link to={`/product/${id}`}>
-        <img src={image[0]} alt={name} className="w-full object-cover" />
+        <img src={image} alt={name} className="w-full object-cover" />
       </Link>
       {/* Product Details */}
       <div className="p-4 text-center">

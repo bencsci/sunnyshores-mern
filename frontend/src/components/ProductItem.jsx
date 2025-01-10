@@ -8,7 +8,7 @@ const ProductItem = ({ id, image, name, price }) => {
   return (
     <div>
       <div className="bg-white shadow-lg rounded p-4 text-center">
-        <img src={image[0]} className="mb-2 flex items-center justify-center" />
+        <img src={image} className="mb-2 flex items-center justify-center" />
         <h3 className="text-lg font-semibold text-black">{name}</h3>
         <p className="text-black font-bold mt-2">
           {currency}
