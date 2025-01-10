@@ -12,11 +12,13 @@ import Navbar from "./components/Navbar";
 import About from "./pages/About";
 import Banner from "./components/Banner";
 import Footer from "./components/Footer";
+import { ToastContainer } from "react-toastify";
 import "./index.css";
 
 const App = () => {
   return (
     <div>
+      <ToastContainer />
       <Banner />
       <Navbar />
       <Routes>

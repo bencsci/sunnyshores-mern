@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { NavLink } from "react-router";
+import { ShopContext } from "../context/shopContext";
 
 const Navbar = () => {
+
   const [nav, setNav] = useState(false);
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
+
 
   const handleNav = () => {
     setNav(!nav);

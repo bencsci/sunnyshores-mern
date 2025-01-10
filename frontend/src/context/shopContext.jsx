@@ -13,6 +13,7 @@ const ShopContextProvider = (props) => {
   const tax_rate = 0.15;
   const [cartItems, setCartItems] = useState({});
   const [products, setProducts] = useState([]);
+  const [token, setToken] = useState("");
   const navigate = useNavigate();
 
   const addToCart = (itemId) => {
@@ -81,6 +82,12 @@ const ShopContextProvider = (props) => {
     getProductData();
   }, []);
 
+  useEffect(() => {
+    if (!token && localStorage.getItem("token")) {
+      setToken(localStorage.getItem("token"));
+    }
+  }, []);
+
   const value = {
     products,
     currency,
@@ -92,6 +99,8 @@ const ShopContextProvider = (props) => {
     getCartCount,
     navigate,
     backendUrl,
+    token,
+    setToken,
   };
 
   return (

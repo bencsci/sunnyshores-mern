@@ -5,7 +5,15 @@ import { Link } from "react-router";
 import { ShopContext } from "../context/shopContext";
 
 const Banner = () => {
-  const { getCartCount } = useContext(ShopContext);
+  const { setCartItem, getCartCount, navigate, token, setToken } =
+    useContext(ShopContext);
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    setToken("");
+    setCartItem({});
+    navigate("/login");
+  };
 
   return (
     <div className="w-full bg-sand shadow-md">
@@ -65,30 +73,33 @@ const Banner = () => {
                 )}
               </div>
 
-              {/* User Dropdown */}
               <div className="relative group">
-                <Link to="/login">
-                  <button
-                    className="w-14 lg:w-20 bg-teal text-white px-3 py-2 rounded shadow hover:bg-teal-600 transition-colors flex items-center justify-center"
-                    title="User"
-                  >
-                    <FaUser size={18} />
-                  </button>
-                </Link>
+                <button
+                  onClick={() => (token ? null : navigate("/login"))}
+                  className="w-14 lg:w-20 bg-teal text-white px-3 py-2 rounded shadow hover:bg-teal-600 transition-colors flex items-center justify-center"
+                  title="User"
+                >
+                  <FaUser size={18} />
+                </button>
 
-                <div className="absolute top-full right-0 mt-2 bg-white shadow-lg rounded text-black w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                  <ul className="text-left">
-                    <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">
-                      <Link to="/login">My Profile</Link>
-                    </li>
-                    <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">
-                      <Link to="/orders">Orders</Link>
-                    </li>
-                    <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">
-                      <Link to="/login">Logout</Link>
-                    </li>
-                  </ul>
-                </div>
+                {/* User Dropdown */}
+                {token && (
+                  <div className="absolute top-full right-0 mt-2 bg-white shadow-lg rounded text-black w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                    <ul className="text-left">
+                      <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">
+                        <Link to="/login">My Profile</Link>
+                      </li>
+                      <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">
+                        <Link to="/orders">Orders</Link>
+                      </li>
+                      <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">
+                        <Link to="/login" onClick={logout}>
+                          Logout
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
+                )}
               </div>
             </div>
           </div>
