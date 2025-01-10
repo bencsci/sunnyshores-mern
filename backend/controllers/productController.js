@@ -1,32 +1,43 @@
 import productModel from "../models/productModel.js";
+import { v2 as cloudinary } from "cloudinary";
 
 // Adding products
 const addProduct = async (req, res) => {
   try {
-    const { name, price, description, category, subCategory } = req.body;
+    const { name, price, description, category, reviews } = req.body;
 
-    // To be fixed, using thunder client for testing. Image is undefined
-    const image = req.files.image && req.files.image[0];
+    let imageUrl = null;
+    if (req.files && req.files.image && req.files.image[0]) {
+      const uploadResponse = await cloudinary.uploader.upload(
+        req.files.image[0].path,
+        {
+          resource_type: "image",
+        }
+      );
+      imageUrl = uploadResponse.secure_url;
+    }
 
-    // Upload image to cloudinary?
+    // Parse reviews if provided
+    let parsedReviews = [];
+    if (reviews) {
+      parsedReviews = JSON.parse(reviews); // Ensure reviews is sent as JSON string from the frontend
+    }
 
-    // Todo: Add image: image.path to productData
+    // Prepare product data
     const productData = {
       name,
       price,
       description,
       category,
-      subCategory,
+      image: imageUrl, // Add Cloudinary image URL to the product data
+      reviews: parsedReviews, // Include reviews
       date: Date.now(),
     };
 
-    console.log(productData);
-
     const product = new productModel(productData);
-
     await product.save();
 
-    res.json({ success: true, message: "Product added successfully" });
+    res.json({ success: true, message: "Product added successfully", product });
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: error.message });

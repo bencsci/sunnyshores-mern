@@ -35,9 +35,9 @@ const App = () => {
             <Sidebar />
             <div className="justify-center items-center flex flex-col w-full">
               <Routes>
-                <Route path="/add" element={<Add token />} />
-                <Route path="/list" element={<List token />} />
-                <Route path="/orders" element={<Orders token />} />
+                <Route path="/add" element={<Add token={token} />} />
+                <Route path="/list" element={<List token={token} />} />
+                <Route path="/orders" element={<Orders token={token} />} />
               </Routes>
             </div>
           </div>

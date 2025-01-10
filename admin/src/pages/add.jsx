@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import axios from "axios";
 import { backendUrl } from "../App";
 
-const add = () => {
+const add = ({ token }) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
-  const [subCategory, setSubCategory] = useState("");
   const [reviews, setReviews] = useState([]);
   const [image, setImage] = useState(null);
 
@@ -49,7 +48,6 @@ const add = () => {
     formData.append("description", description);
     formData.append("price", price);
     formData.append("category", category);
-    formData.append("subCategory", subCategory);
     formData.append("reviews", JSON.stringify(reviews));
 
     if (image) {
@@ -58,12 +56,14 @@ const add = () => {
 
     try {
       const response = await axios.post(
-        backendUrl + "/api/products/add",
-        formData
+        `${backendUrl}/api/product/add`,
+        formData,
+        { headers: { token } }
       );
       console.log(response.data);
     } catch (error) {
       console.error(error);
+      alert("Error adding product.");
     }
   };
 
@@ -114,58 +114,30 @@ const add = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 md:gap-6">
+          <div>
             {/* Category */}
-            <div>
-              <label
-                htmlFor="category"
-                className="block text-gray-700 font-medium mb-2"
-              >
-                Category
-              </label>
-              <select
-                id="category"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400"
-                required
-              >
-                <option value="" disabled>
-                  Select a category
-                </option>
-                <option value="Shirts">Shirts</option>
-                <option value="Surf">Surf</option>
-                <option value="Accessories">Accessories</option>
-                <option value="Footwear">Footwear</option>
-                <option value="Swimwear">Swimwear</option>
-              </select>
-            </div>
-
-            {/* Sub-Category */}
-            <div>
-              <label
-                htmlFor="subCategory"
-                className="block text-gray-700 font-medium mb-2"
-              >
-                Sub-Category
-              </label>
-              <select
-                id="subCategory"
-                value={subCategory}
-                onChange={(e) => setSubCategory(e.target.value)}
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400"
-                required
-              >
-                <option value="" disabled>
-                  Select a sub-category
-                </option>
-                <option value="SHR">SHR</option>
-                <option value="BRD">BRD</option>
-                <option value="ACS">ACS</option>
-                <option value="FET">FET</option>
-                <option value="SWM">SWM</option>
-              </select>
-            </div>
+            <label
+              htmlFor="category"
+              className="block text-gray-700 font-medium mb-2"
+            >
+              Category
+            </label>
+            <select
+              id="category"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400"
+              required
+            >
+              <option value="" disabled>
+                Select a category
+              </option>
+              <option value="Shirts">Shirts</option>
+              <option value="Surf">Surf</option>
+              <option value="Accessories">Accessories</option>
+              <option value="Footwear">Footwear</option>
+              <option value="Swimwear">Swimwear</option>
+            </select>
           </div>
 
           {/* Description */}
