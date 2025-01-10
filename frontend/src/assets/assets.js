@@ -56,7 +56,7 @@ export const products = [
     price: 19.99,
     image: [BucketHat],
     category: "Accessories",
-    subCategory: "HAT",
+    subCategory: "ACS",
     reviews: [
       { reviewer: "Jane Doe", comment: "Stylish and practical!", rating: 5 },
     ],
@@ -152,7 +152,7 @@ export const products = [
     price: 24.99,
     image: [StrawHat],
     category: "Accessories",
-    subCategory: "HAT",
+    subCategory: "ACS",
     reviews: [{ reviewer: "Grace Hall", comment: "Looks amazing!", rating: 5 }],
   },
   {
@@ -163,7 +163,7 @@ export const products = [
     price: 34.99,
     image: [SunGlasses],
     category: "Accessories",
-    subCategory: "GLS",
+    subCategory: "ACS",
     reviews: [
       {
         reviewer: "Chris Parker",
@@ -185,7 +185,7 @@ export const products = [
     price: 49.99,
     image: [SwimTrunks],
     category: "Swimwear",
-    subCategory: "TRK",
+    subCategory: "SWM",
     reviews: [
       {
         reviewer: "Alex Rivers",
