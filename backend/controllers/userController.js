@@ -4,12 +4,13 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 const createToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, {});
+  return jwt.sign({ id }, process.env.JWT_SECRET);
 };
 
 // Route for user login
 const loginUser = async (req, res) => {
   try {
+    console.log("Logged In!");
     const { email, password } = req.body;
 
     // Checking if the user exists or not

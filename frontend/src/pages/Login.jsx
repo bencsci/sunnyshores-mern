@@ -5,7 +5,8 @@ import { toast } from "react-toastify";
 
 const Login = () => {
   const [currentState, setCurrentState] = useState("Login");
-  const { token, setToken, navigate, backendUrl } = useContext(ShopContext);
+  const { token, setToken, navigate, backendUrl, getCartInfo } =
+    useContext(ShopContext);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -41,6 +42,9 @@ const Login = () => {
         if (response.data.success) {
           setToken(response.data.token);
           localStorage.setItem("token", response.data.token);
+
+          // Get cart info when user logs in, so cart will display instantly
+          getCartInfo();
         } else {
           toast.error(response.data.message);
         }

@@ -36,8 +36,8 @@ const Hero = () => {
           passion for capturing the essence of summer and the coastal lifestyle.
           Our journey takes us to beaches around the globe, where we explore the
           vibrant world of surf essentials. We delve into the sandy shores and
-          azure waves to curate a collection that reflects the spirit of carefree
-          summer days.
+          azure waves to curate a collection that reflects the spirit of
+          carefree summer days.
         </p>
         <p className="text-black leading-relaxed mb-6">
           Step into our e-store, where summer never ends, and beach memories

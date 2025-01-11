@@ -96,6 +96,7 @@ const Product = () => {
           {relatedProducts.length > 0 ? (
             relatedProducts.map((product) => (
               <ProductItem
+                key={product._id}
                 id={product._id}
                 image={product.image}
                 name={product.name}

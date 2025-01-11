@@ -16,21 +16,45 @@ const ShopContextProvider = (props) => {
   const [token, setToken] = useState("");
   const navigate = useNavigate();
 
-  const addToCart = (itemId) => {
+  const addToCart = async (itemId) => {
     const cartData = structuredClone(cartItems);
     cartData[itemId] = (cartData[itemId] || 0) + 1;
     setCartItems(cartData);
-  };
 
-  const updateQuantity = async (itemId, change) => {
-    const cartData = structuredClone(cartItems);
-    if (cartData[itemId]) {
-      cartData[itemId] += change;
-      if (cartData[itemId] <= 0) {
-        delete cartData[itemId];
+    if (token) {
+      try {
+        await axios.post(
+          `${backendUrl}/api/cart/add`,
+          { itemId },
+          { headers: { token } }
+        );
+        console.log(`${backendUrl}/api/cart/add`);
+        console.log(token);
+      } catch (error) {
+        console.log(error.message);
+        toast.error(error.message);
       }
     }
+  };
+
+  const updateQuantity = async (itemId, quantity) => {
+    const cartData = structuredClone(cartItems);
+
+    cartData[itemId] = quantity;
     setCartItems(cartData);
+
+    if (token) {
+      try {
+        await axios.post(
+          `${backendUrl}/api/cart/update`,
+          { itemId, quantity },
+          { headers: { token } }
+        );
+      } catch (error) {
+        console.log(error);
+        toast.error(error.message);
+      }
+    }
   };
 
   const getCartAmount = async () => {
@@ -74,7 +98,31 @@ const ShopContextProvider = (props) => {
       }
     } catch (error) {
       console.log(error);
-      toast.error("Error fetching product data");
+      toast.error(error.message);
+    }
+  };
+
+  const getUserCart = async (token) => {
+    try {
+      const response = await axios.post(
+        `${backendUrl}/api/cart/get`,
+        {},
+        { headers: { token } }
+      );
+
+      if (response.data.success) {
+        setCartItems(response.data.cartData);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
+  };
+
+  const getCartInfo = () => {
+    if (!token && localStorage.getItem("token")) {
+      setToken(localStorage.getItem("token"));
+      getUserCart(localStorage.getItem("token"));
     }
   };
 
@@ -85,6 +133,7 @@ const ShopContextProvider = (props) => {
   useEffect(() => {
     if (!token && localStorage.getItem("token")) {
       setToken(localStorage.getItem("token"));
+      getUserCart(localStorage.getItem("token"));
     }
   }, []);
 
@@ -101,6 +150,7 @@ const ShopContextProvider = (props) => {
     backendUrl,
     token,
     setToken,
+    getCartInfo,
   };
 
   return (

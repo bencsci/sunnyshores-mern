@@ -122,6 +122,7 @@ const Catalog = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {sortedProducts.map((product) => (
           <ProductCatalog
+            key={product._id}
             id={product._id}
             image={product.image}
             name={product.name}
