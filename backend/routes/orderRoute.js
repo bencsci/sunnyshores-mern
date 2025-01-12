@@ -1,4 +1,4 @@
-import express from "espress";
+import express from "express";
 import {
   placeOrder,
   placeOrderPaypal,
@@ -22,6 +22,6 @@ orderRouter.post("/paypal", auth, placeOrderPaypal);
 orderRouter.post("/stripe", auth, placeOrderStripe);
 
 // User Routes
-orderRoutes.post("/user-orders", auth, userOrders);
+orderRouter.post("/user-orders", auth, userOrders);
 
 export default orderRouter;

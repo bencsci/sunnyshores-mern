@@ -1,24 +1,43 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ShopContext } from "../context/shopContext";
 import { Link } from "react-router";
+import axios from "axios";
 
 const Orders = () => {
-  const { products, currency, cartItems } = useContext(ShopContext);
+  const { backendUrl, token, currency } = useContext(ShopContext);
   const [orderData, setOrderData] = useState([]);
 
-  useEffect(() => {
-    const orderProducts = Object.entries(cartItems).map(
-      ([itemId, quantity], index) => {
-        const product = products.find((p) => p._id === itemId);
-        return {
-          ...product,
-          quantity,
-          orderDate: `2023-12-${String(20 + index).padStart(2, "0")}`, // Placeholder dates
-        };
+  const loadOrderData = async () => {
+    try {
+      if (!token) {
+        return null;
       }
-    );
-    setOrderData(orderProducts);
-  }, [cartItems, products]);
+
+      const response = await axios.post(
+        `${backendUrl}/api/order/user-orders`,
+        {},
+        { headers: { token } }
+      );
+
+      if (response.data.success) {
+        const allItemOrders = [];
+        response.data.orders.map((order) => {
+          order.items.map((item) => {
+            item["status"] = order.status;
+            item["payment"] = order.payment;
+            item["paymentMethod"] = order.paymentMethod;
+            item["date"] = order.date;
+            allItemOrders.push(item);
+          });
+        });
+        setOrderData(allItemOrders.reverse());
+      }
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    loadOrderData();
+  }, [token]);
 
   return (
     <div className="min-h-screen flex flex-col justify-between">
@@ -46,13 +65,13 @@ const Orders = () => {
             {orderData.map((item) => (
               <div
                 key={item._id}
-                className="bg-white shadow-lg rounded-lg p-4 md:p-6 flex flex-col md:flex-row items-start space-y-4 md:space-y-0 md:space-x-6 w-full md:w-[800px]"
+                className=" bg-white shadow-lg rounded-lg p-4 md:p-6 flex flex-col md:flex-row items-start space-y-4 md:space-y-0 md:space-x-6 w-full md:w-[800px]"
               >
                 {/* Product Image */}
                 <img
-                  src={item.image[0]}
+                  src={item.image}
                   alt={item.name}
-                  className="w-32 h-32 md:w-40 md:h-40 object-cover rounded-lg mx-auto md:mx-0"
+                  className="w-72 h-72 object-cover rounded-lg mx-auto md:mx-0"
                 />
 
                 {/* Product Details */}
@@ -72,7 +91,17 @@ const Orders = () => {
                     {(item.price * item.quantity).toFixed(2)}
                   </p>
                   <p className="text-gray-500 text-sm mt-4">
-                    <strong>Order Date:</strong> {item.orderDate}
+                    <strong>Order Date:</strong>{" "}
+                    {new Date(item.date).toDateString()}
+                  </p>
+                  <p className="text-gray-500 text-sm mt-4">
+                    <strong>Payment Method:</strong>{" "}
+                    {item.paymentMethod === "cod"
+                      ? "Cash on Delivery"
+                      : item.paymentMethod}
+                  </p>
+                  <p className="text-gray-500 text-sm mt-4">
+                    <strong>Status:</strong> {item.status}
                   </p>
                 </div>
 
@@ -80,9 +109,9 @@ const Orders = () => {
                 <div>
                   <Link
                     to={`/product/${item._id}`}
-                    className="text-teal-500 hover:underline text-sm font-semibold"
+                    className="hover:underline text-sm font-semibold"
                   >
-                    View Details
+                    View Product Details
                   </Link>
                 </div>
               </div>

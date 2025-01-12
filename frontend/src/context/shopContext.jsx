@@ -9,7 +9,7 @@ export const ShopContext = createContext();
 const ShopContextProvider = (props) => {
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
   const currency = "$";
-  const delivery_fee = 10;
+  const deliveryFee = 10;
   const tax_rate = 0.15;
   const [cartItems, setCartItems] = useState({});
   const [products, setProducts] = useState([]);
@@ -67,12 +67,12 @@ const ShopContextProvider = (props) => {
     );
 
     const taxes = subtotal * tax_rate;
-    const total = subtotal + taxes + delivery_fee;
+    const total = subtotal + taxes + deliveryFee;
 
     return {
       subtotal,
       taxes,
-      shipping: delivery_fee,
+      shipping: deliveryFee,
       total,
     };
   };
@@ -140,9 +140,10 @@ const ShopContextProvider = (props) => {
   const value = {
     products,
     currency,
-    delivery_fee,
+    deliveryFee,
     cartItems,
     addToCart,
+    setCartItems,
     updateQuantity,
     getCartAmount,
     getCartCount,
