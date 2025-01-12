@@ -1,0 +1,27 @@
+import express from "espress";
+import {
+  placeOrder,
+  placeOrderPaypal,
+  placeOrderStripe,
+  allOrders,
+  userOrders,
+  updateStatus,
+} from "../controllers/orderController.js";
+import adminAuth from "../middleware/adminAuth.js";
+import auth from "../middleware/auth.js";
+
+const orderRouter = express.Router();
+
+// Admin Routes
+orderRouter.post("/list", adminAuth, allOrders);
+orderRouter.post("/status", adminAuth, updateStatus);
+
+// Payment Routes
+orderRouter.post("/place", auth, placeOrder);
+orderRouter.post("/paypal", auth, placeOrderPaypal);
+orderRouter.post("/stripe", auth, placeOrderStripe);
+
+// User Routes
+orderRoutes.post("/user-orders", auth, userOrders);
+
+export default orderRouter;
